@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://frigotrack.example/schemas/telemetry_ack.json",
+  "title": "Conferma di ricezione (ack) ed eventuale allarme",
+  "type": "object",
+  "required": ["status", "received_at"],
+  "properties": {
+    "status": { "const": "ok" },
+    "received_at": { "type": "string", "format": "date-time" },
+    "alarm": {
+      "type": "object",
+      "description": "Presente solo se la temperatura esce dall'intervallo di sicurezza del tipo di merce.",
+      "required": ["type", "message", "value", "min", "max"],
+      "properties": {
+        "type": { "const": "temperature_out_of_range" },
+        "message": { "type": "string", "maxLength": 200 },
+        "value": { "type": "number" },
+        "min": { "type": "number" },
+        "max": { "type": "number" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

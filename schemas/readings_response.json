@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://frigotrack.example/schemas/readings_response.json",
+  "title": "Elenco misure",
+  "type": "object",
+  "required": ["count", "readings"],
+  "properties": {
+    "count": { "type": "integer", "minimum": 0 },
+    "readings": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "type": "object",
+        "required": ["sensor_id", "timestamp", "cargo_type", "temperature_c", "received_at", "alarm"],
+        "properties": {
+          "sensor_id": { "type": "string", "pattern": "^[A-Z]+-[A-Z]{2}-[0-9]{3}$" },
+          "timestamp": { "type": "string", "format": "date-time" },
+          "cargo_type": { "enum": ["food", "pharma", "frozen"] },
+          "temperature_c": { "type": "number", "minimum": -40, "maximum": 40 },
+          "humidity": { "type": "number", "minimum": 0, "maximum": 100 },
+          "battery": { "type": "integer", "minimum": 0, "maximum": 100 },
+          "received_at": { "type": "string", "format": "date-time" },
+          "alarm": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

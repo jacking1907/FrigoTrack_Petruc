@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://frigotrack.example/schemas/error.json",
+  "title": "Messaggio di errore",
+  "description": "Se il messaggio e' arrivato decifrato correttamente, l'errore (che puo' citare il campo sbagliato) viaggia a sua volta in una busta cifrata. Negli altri casi (busta malformata, tag errato, sessione inesistente) l'errore e' generico e in chiaro.",
+  "type": "object",
+  "required": ["status", "error", "message", "field"],
+  "properties": {
+    "status": { "enum": [400, 401, 404] },
+    "error": {
+      "enum": [
+        "bad_request",
+        "invalid_message",
+        "invalid_envelope",
+        "decryption_failed",
+        "replay_detected",
+        "unknown_session",
+        "not_found"
+      ]
+    },
+    "message": { "type": "string", "maxLength": 300 },
+    "field": { "type": ["string", "null"], "description": "percorso del campo sbagliato, null se non applicabile" }
+  },
+  "additionalProperties": false
+}

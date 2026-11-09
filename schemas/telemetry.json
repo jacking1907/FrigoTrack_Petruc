@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://frigotrack.example/schemas/telemetry.json",
+  "title": "Misura sensore",
+  "description": "Messaggio applicativo inviato da un sensore (prima di essere cifrato).",
+  "type": "object",
+  "required": ["sensor_id", "timestamp", "cargo_type", "temperature_c"],
+  "properties": {
+    "sensor_id": {
+      "type": "string",
+      "pattern": "^[A-Z]+-[A-Z]{2}-[0-9]{3}$",
+      "description": "TIPO-PROVINCIA-NUMERO, es. CELLA-BG-007"
+    },
+    "timestamp": { "type": "string", "format": "date-time", "description": "RFC 3339, es. 2026-11-02T08:15:30Z" },
+    "cargo_type": { "enum": ["food", "pharma", "frozen"] },
+    "temperature_c": { "type": "number", "minimum": -40, "maximum": 40 },
+    "humidity": { "type": "number", "minimum": 0, "maximum": 100 },
+    "battery": { "type": "integer", "minimum": 0, "maximum": 100 }
+  },
+  "additionalProperties": false
+}

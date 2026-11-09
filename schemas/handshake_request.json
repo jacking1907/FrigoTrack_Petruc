@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://frigotrack.example/schemas/handshake_request.json",
+  "title": "Handshake - richiesta del client",
+  "description": "Il client propone il gruppo DH (p, g) e la propria chiave pubblica A = g^a mod p. Gli interi sono stringhe esadecimali perche' 2048 bit non stanno in un numero JSON.",
+  "type": "object",
+  "required": ["p", "g", "A"],
+  "properties": {
+    "p": { "type": "string", "pattern": "^[0-9a-fA-F]{1,1024}$", "description": "modulo primo (hex)" },
+    "g": { "type": "string", "pattern": "^[0-9a-fA-F]{1,1024}$", "description": "generatore (hex)" },
+    "A": { "type": "string", "pattern": "^[0-9a-fA-F]{1,1024}$", "description": "chiave pubblica del client (hex)" }
+  },
+  "additionalProperties": false
+}

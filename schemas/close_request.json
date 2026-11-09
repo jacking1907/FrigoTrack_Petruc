@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://frigotrack.example/schemas/close_request.json",
+  "title": "Chiusura sessione - richiesta",
+  "type": "object",
+  "required": ["action"],
+  "properties": {
+    "action": { "const": "close" }
+  },
+  "additionalProperties": false
+}
